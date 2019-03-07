@@ -215,10 +215,11 @@ class GiftedChat extends React.Component {
     return this._isMounted;
   }
 
+  // ANCHOR input toolbar 的高度， 可能跟输入框下面的扩展区域有挂
   // TODO: setMinInputToolbarHeight
   getMinInputToolbarHeight() {
     return this.props.renderAccessory
-      ? this.props.minInputToolbarHeight * 2
+      ? this.props.minInputToolbarHeight + this.props.minAccessoryHeight
       : this.props.minInputToolbarHeight;
   }
   calculateInputToolbarHeight(composerHeight) {
@@ -310,12 +311,12 @@ class GiftedChat extends React.Component {
           height: this.state.messagesContainerHeight,
         }}
       >
+        {this.renderChatHeader()}
         <MessageContainer
           {...this.props}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
           ref={(component) => (this._messageContainerRef = component)}
-
         />
         {this.renderChatFooter()}
       </AnimatedView>
@@ -557,6 +558,7 @@ GiftedChat.defaultProps = {
   onPressActionButton: null,
   bottomOffset: 0,
   minInputToolbarHeight: 44,
+  minAccessoryHeight: 44,
   keyboardShouldPersistTaps: Platform.select({
     ios: 'never',
     android: 'always',
@@ -614,6 +616,7 @@ GiftedChat.propTypes = {
   onPressActionButton: PropTypes.func,
   bottomOffset: PropTypes.number,
   minInputToolbarHeight: PropTypes.number,
+  minAccessoryHeight: PropTypes.number,
   listViewProps: PropTypes.object,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
   onInputTextChanged: PropTypes.func,
