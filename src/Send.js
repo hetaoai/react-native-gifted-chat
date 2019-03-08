@@ -14,7 +14,7 @@ export default function Send({ text, containerStyle, onSend, children, textStyle
         accessibilityLabel="send"
         style={[styles.container, containerStyle]}
         onPress={() => {
-          onSend({ text: text.trim() }, true);
+          onSend(text.trim(), true);
         }}
         accessibilityTraits="button"
         disabled={disabled}
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
 Send.defaultProps = {
   text: '',
-  onSend: () => {},
+  onSend: () => { },
   label: 'Send',
   containerStyle: {},
   textStyle: {},

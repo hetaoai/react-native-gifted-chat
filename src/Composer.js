@@ -81,8 +81,8 @@ Composer.defaultProps = {
   textInputStyle: {},
   textInputAutoFocus: false,
   keyboardAppearance: 'default',
-  onTextChanged: () => {},
-  onInputSizeChanged: () => {},
+  onTextChanged: () => { },
+  onInputSizeChanged: () => { },
 };
 
 Composer.propTypes = {

@@ -75,7 +75,7 @@ export default class InputToolbar extends React.Component {
   renderAccessory() {
     if (this.props.renderAccessory) {
       return (
-        <View style={[styles.accessory, this.props.accessoryStyle]}>{this.props.renderAccessory(this.props)}</View>
+        <View style={[this.props.accessoryStyle, { height: this.props.accessoryHeight + this.props.accessoryDetailHeight }]}>{this.props.renderAccessory(this.props)}</View>
       );
     }
     return null;
@@ -109,9 +109,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  accessory: {
-    height: 44,
-  },
 });
 
 InputToolbar.defaultProps = {
@@ -122,7 +119,9 @@ InputToolbar.defaultProps = {
   containerStyle: {},
   primaryStyle: {},
   accessoryStyle: {},
-  onPressActionButton: () => {},
+  onPressActionButton: () => { },
+  accessoryHeight: 44,
+  accessoryDetailHeight: 0,
 };
 
 InputToolbar.propTypes = {
@@ -131,6 +130,8 @@ InputToolbar.propTypes = {
   renderSend: PropTypes.func,
   renderComposer: PropTypes.func,
   onPressActionButton: PropTypes.func,
+  accessoryHeight: PropTypes.number,
+  accessoryDetailHeight: PropTypes.number,
   containerStyle: ViewPropTypes.style,
   primaryStyle: ViewPropTypes.style,
   accessoryStyle: ViewPropTypes.style,
