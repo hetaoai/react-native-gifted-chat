@@ -581,6 +581,7 @@ GiftedChat.defaultProps = {
   renderTime: null,
   renderFooter: null,
   renderChatFooter: null,
+  renderChatHeader: null,
   renderInputToolbar: null,
   renderComposer: null,
   renderActions: null,
