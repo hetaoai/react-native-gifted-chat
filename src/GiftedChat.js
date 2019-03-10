@@ -120,15 +120,17 @@ class GiftedChat extends React.Component {
     this.setTextFromProp(text);
     // TODO
     const newMessagesContainerHeight = this.getBasicMessagesContainerHeight(undefined, nextProps);
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start();
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      });
+    if (this.state.messagesContainerHeight) {
+      if (this.props.isAnimated === true) {
+        Animated.timing(this.state.messagesContainerHeight, {
+          toValue: newMessagesContainerHeight,
+          duration: 210,
+        }).start();
+      } else {
+        this.setState({
+          messagesContainerHeight: newMessagesContainerHeight,
+        });
+      }
     }
   }
 
@@ -227,7 +229,6 @@ class GiftedChat extends React.Component {
     return this._isMounted;
   }
 
-  // ANCHOR input toolbar 的高度， 可能跟输入框下面的扩展区域有挂
   // TODO: setMinInputToolbarHeight
   getMinInputToolbarHeight(props) {
     return this.props.renderAccessory
