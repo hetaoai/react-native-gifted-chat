@@ -113,7 +113,7 @@ export default class MessageContainer extends React.PureComponent {
 
     const messageProps = {
       ...restProps,
-      key: item._id,
+      key: item.id,
       currentMessage: item,
       previousMessage,
       nextMessage,
@@ -223,7 +223,7 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
-  onLoadEarlier: () => {},
+  onLoadEarlier: () => { },
   inverted: true,
   loadEarlier: false,
   listViewProps: {},
