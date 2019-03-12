@@ -98,7 +98,7 @@ export default class MessageContainer extends React.PureComponent {
   };
 
   renderRow = ({ item, index }) => {
-    if (!item._id && item._id !== 0) {
+    if (!item.id && !item._id && item._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
     if (!item.user) {
@@ -164,7 +164,7 @@ export default class MessageContainer extends React.PureComponent {
           automaticallyAdjustContentInsets={false}
           inverted={this.props.inverted}
           data={this.props.messages}
-          style={styles.listStyle}
+          style={[styles.listStyle, this.props.listStyle]}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}
@@ -232,11 +232,13 @@ MessageContainer.defaultProps = {
   scrollToBottom: false,
   scrollToBottomOffset: 200,
   alignTop: false,
+  listStyle: {},
 };
 
 MessageContainer.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.object,
+  listStyle: PropTypes.object,
   renderFooter: PropTypes.func,
   renderMessage: PropTypes.func,
   renderLoadEarlier: PropTypes.func,
