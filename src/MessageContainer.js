@@ -99,11 +99,11 @@ export default class MessageContainer extends React.PureComponent {
 
   renderRow = ({ item, index }) => {
     if (!item.id && !item._id && item._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
+      // console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
     if (!item.user) {
       if (!item.system) {
-        console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
+        // console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
       }
       item.user = {};
     }
@@ -147,7 +147,7 @@ export default class MessageContainer extends React.PureComponent {
     return scrollToBottomComponent;
   }
 
-  keyExtractor = (item) => `${item._id}`;
+  keyExtractor = (item) => `${item._id || item.id}`;
 
   render() {
     if (this.props.messages.length === 0) {
