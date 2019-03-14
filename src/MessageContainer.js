@@ -154,7 +154,7 @@ export default class MessageContainer extends React.PureComponent {
       return <View style={styles.container} />;
     }
     return (
-      <View style={this.props.alignTop ? styles.containerAlignTop : styles.container}>
+      <View style={this.props.alignTop ? styles.containerAlignTop : styles.container} >
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
@@ -173,6 +173,8 @@ export default class MessageContainer extends React.PureComponent {
           onScroll={this.handleOnScroll}
           scrollEventThrottle={100}
           {...this.props.listViewProps}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
         />
       </View>
     );
