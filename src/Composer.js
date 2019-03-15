@@ -83,6 +83,7 @@ Composer.defaultProps = {
   textInputAutoFocus: false,
   keyboardAppearance: 'default',
   returnKeyLabel: '发送',
+  returnKeyType: 'send',
   onTextChanged: () => { },
   onInputSizeChanged: () => { },
 };
@@ -100,4 +101,5 @@ Composer.propTypes = {
   textInputAutoFocus: PropTypes.bool,
   keyboardAppearance: PropTypes.string,
   returnKeyLabel: PropTypes.string,
+  returnKeyType: PropTypes.string,
 };
