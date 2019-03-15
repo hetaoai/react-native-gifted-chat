@@ -44,7 +44,7 @@ export default class Composer extends React.Component {
         onSubmitEditing={() => {
           const { text } = this.props;
           if (text.trim().length > 0) {
-            this.props.onSend(text.trim());
+            this.props.onSend(text.trim(), true);
             Keyboard.dismiss();
           }
         }}
