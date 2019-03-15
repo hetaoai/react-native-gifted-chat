@@ -41,6 +41,12 @@ export default class Composer extends React.Component {
         onChange={(e) => this.onContentSizeChange(e)}
         onContentSizeChange={(e) => this.onContentSizeChange(e)}
         onChangeText={(text) => this.onChangeText(text)}
+        onSubmitEditing={() => {
+          const { text } = this.props;
+          if (text.trim().length > 0) {
+            this.props.onSend(text.trim());
+          }
+        }}
         style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
         autoFocus={this.props.textInputAutoFocus}
         value={this.props.text}
@@ -77,12 +83,13 @@ Composer.defaultProps = {
   placeholderTextColor: Color.defaultProps,
   placeholder: DEFAULT_PLACEHOLDER,
   textInputProps: null,
-  multiline: true,
+  multiline: false,
   textInputStyle: {},
   textInputAutoFocus: false,
   keyboardAppearance: 'default',
   onTextChanged: () => { },
   onInputSizeChanged: () => { },
+  onSend: () => { },
 };
 
 Composer.propTypes = {
@@ -93,6 +100,7 @@ Composer.propTypes = {
   textInputProps: PropTypes.object,
   onTextChanged: PropTypes.func,
   onInputSizeChanged: PropTypes.func,
+  onSend: PropTypes.func,
   multiline: PropTypes.bool,
   textInputStyle: TextInput.propTypes.style,
   textInputAutoFocus: PropTypes.bool,
