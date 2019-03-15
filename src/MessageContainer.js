@@ -10,11 +10,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View, StyleSheet, Keyboard, TouchableOpacity, Text } from 'react-native';
+import { FlatList, View, StyleSheet, Keyboard, Text, TouchableOpacity } from 'react-native';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 import Color from './Color';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default class MessageContainer extends React.PureComponent {
 
@@ -95,6 +96,9 @@ export default class MessageContainer extends React.PureComponent {
     } else {
       this.setState({ showScrollBottom: false });
     }
+    if (this.props.onPressList) {
+      this.props.onPressList();
+    }
   };
 
   renderRow = ({ item, index }) => {
@@ -154,8 +158,10 @@ export default class MessageContainer extends React.PureComponent {
       return <View style={styles.container} />;
     }
     return (
+      // <TouchableWithoutFeedback onPress={this.props.onPressList}>
       <View style={this.props.alignTop ? styles.containerAlignTop : styles.container} >
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
+        {/* <TouchableWithoutFeedback onPress={this.props.onPressList} style={{ flex: 1 }}> */}
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
           extraData={this.props.extraData}
@@ -176,7 +182,9 @@ export default class MessageContainer extends React.PureComponent {
           initialNumToRender={10}
           maxToRenderPerBatch={10}
         />
+        {/* </TouchableWithoutFeedback> */}
       </View>
+      // </TouchableWithoutFeedback>
     );
   }
 
@@ -226,6 +234,7 @@ MessageContainer.defaultProps = {
   renderFooter: null,
   renderMessage: null,
   onLoadEarlier: () => { },
+  onPressList: () => { },
   inverted: true,
   loadEarlier: false,
   listViewProps: {},
@@ -245,6 +254,7 @@ MessageContainer.propTypes = {
   renderMessage: PropTypes.func,
   renderLoadEarlier: PropTypes.func,
   onLoadEarlier: PropTypes.func,
+  onPressList: PropTypes.func,
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,

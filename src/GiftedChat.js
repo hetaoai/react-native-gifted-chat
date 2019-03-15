@@ -229,11 +229,18 @@ class GiftedChat extends React.Component {
     return this._isMounted;
   }
 
+  getIphonxBottomOffset = (props) => {
+    if (props) {
+      return props.iphonexBottomOffset;
+    }
+    return this.props.iphonexBottomOffset;
+  }
+
   // TODO: setMinInputToolbarHeight
   getMinInputToolbarHeight(props) {
-    return this.props.renderAccessory
+    return (this.props.renderAccessory
       ? this.props.minInputToolbarHeight + this.getAccessoryHeight(props)
-      : this.props.minInputToolbarHeight;
+      : this.props.minInputToolbarHeight) + this.getIphonxBottomOffset(props);
   }
   calculateInputToolbarHeight(composerHeight, props) {
     return composerHeight + (this.getMinInputToolbarHeight(props) - this.props.minComposerHeight);
@@ -273,7 +280,7 @@ class GiftedChat extends React.Component {
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
+    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard() + this.getIphonxBottomOffset();
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
         toValue: newMessagesContainerHeight,
@@ -402,7 +409,7 @@ class GiftedChat extends React.Component {
     );
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
       newComposerHeight,
-    );
+    ) + this.getIphonxBottomOffset();
     this.setState({
       composerHeight: newComposerHeight,
       messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
@@ -605,6 +612,7 @@ GiftedChat.defaultProps = {
   minComposerHeight: MIN_COMPOSER_HEIGHT,
   maxComposerHeight: MAX_COMPOSER_HEIGHT,
   listStyle: {},
+  iphonexBottomOffset: 0,
 };
 
 GiftedChat.propTypes = {
@@ -655,6 +663,7 @@ GiftedChat.propTypes = {
   minInputToolbarHeight: PropTypes.number,
   accessoryHeight: PropTypes.number,
   accessoryDetailHeight: PropTypes.number,
+  iphonexBottomOffset: PropTypes.number,
   listViewProps: PropTypes.object,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
   onInputTextChanged: PropTypes.func,

@@ -19,6 +19,7 @@ export default class InputToolbar extends React.Component {
 
     this.state = {
       position: 'absolute',
+      keyboardOut: false,
     };
   }
 
@@ -36,6 +37,7 @@ export default class InputToolbar extends React.Component {
     if (this.state.position !== 'relative') {
       this.setState({
         position: 'relative',
+        keyboardOut: true,
       });
     }
   }
@@ -44,6 +46,7 @@ export default class InputToolbar extends React.Component {
     if (this.state.position !== 'absolute') {
       this.setState({
         position: 'absolute',
+        keyboardOut: false,
       });
     }
   }
@@ -90,6 +93,7 @@ export default class InputToolbar extends React.Component {
           {this.renderSend()}
         </View>
         {this.renderAccessory()}
+        {!!this.props.iphonexBottomOffset && !this.state.keyboardOut && this.props.renderBottomPadding && this.props.renderBottomPadding()}
       </View>
     );
   }
@@ -116,15 +120,18 @@ InputToolbar.defaultProps = {
   renderActions: null,
   renderSend: null,
   renderComposer: null,
+  renderBottomPadding: null,
   containerStyle: {},
   primaryStyle: {},
   accessoryStyle: {},
   onPressActionButton: () => { },
   accessoryHeight: 44,
   accessoryDetailHeight: 0,
+  iphonexBottomOffset: 0,
 };
 
 InputToolbar.propTypes = {
+  renderBottomPadding: PropTypes.func,
   renderAccessory: PropTypes.func,
   renderActions: PropTypes.func,
   renderSend: PropTypes.func,
@@ -132,6 +139,7 @@ InputToolbar.propTypes = {
   onPressActionButton: PropTypes.func,
   accessoryHeight: PropTypes.number,
   accessoryDetailHeight: PropTypes.number,
+  iphonexBottomOffset: PropTypes.number,
   containerStyle: ViewPropTypes.style,
   primaryStyle: ViewPropTypes.style,
   accessoryStyle: ViewPropTypes.style,
