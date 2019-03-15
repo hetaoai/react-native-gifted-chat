@@ -258,7 +258,7 @@ class GiftedChat extends React.Component {
    */
   getMessagesContainerHeightWithKeyboard(composerHeight = this.state.composerHeight, props) {
     return this.getBasicMessagesContainerHeight(composerHeight, props) -
-      this.getKeyboardHeight() + this.getBottomOffset() + this.props.accessoryDetailHeight;
+      this.getKeyboardHeight() + this.getBottomOffset() + this.props.accessoryDetailHeight + this.getIphonxBottomOffset();
   }
 
   getAccessoryHeight(props) {
@@ -280,7 +280,7 @@ class GiftedChat extends React.Component {
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard() + this.getIphonxBottomOffset();
+    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
         toValue: newMessagesContainerHeight,
@@ -409,7 +409,7 @@ class GiftedChat extends React.Component {
     );
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
       newComposerHeight,
-    ) + this.getIphonxBottomOffset();
+    );
     this.setState({
       composerHeight: newComposerHeight,
       messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),

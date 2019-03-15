@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Platform, StyleSheet, TextInput } from 'react-native';
+import { Platform, StyleSheet, TextInput, Keyboard } from 'react-native';
 
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant';
 import Color from './Color';
@@ -45,6 +45,7 @@ export default class Composer extends React.Component {
           const { text } = this.props;
           if (text.trim().length > 0) {
             this.props.onSend(text.trim());
+            Keyboard.dismiss();
           }
         }}
         style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
