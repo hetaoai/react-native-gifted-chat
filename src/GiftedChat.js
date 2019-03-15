@@ -52,6 +52,7 @@ class GiftedChat extends React.Component {
     this._isFirstLayout = true;
     this._locale = 'en';
     this._messages = [];
+    this._keyboardOut = false;
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -119,7 +120,9 @@ class GiftedChat extends React.Component {
     this.setMessages(messages || []);
     this.setTextFromProp(text);
     // TODO
-    const newMessagesContainerHeight = this.getBasicMessagesContainerHeight(undefined, nextProps);
+    const newMessagesContainerHeight = this.getKeyboardOut() ?
+      this.getMessagesContainerHeightWithKeyboard(undefined, nextProps) :
+      this.getBasicMessagesContainerHeight(undefined, nextProps);
     if (this.state.messagesContainerHeight) {
       if (this.props.isAnimated === true) {
         Animated.timing(this.state.messagesContainerHeight, {
@@ -229,6 +232,14 @@ class GiftedChat extends React.Component {
     return this._isMounted;
   }
 
+  setKeyboardOut = (value) => {
+    this._keyboardOut = value;
+  }
+
+  getKeyboardOut = () => {
+    return this._keyboardOut;
+  }
+
   getIphonxBottomOffset = (props) => {
     if (props) {
       return props.iphonexBottomOffset;
@@ -280,6 +291,7 @@ class GiftedChat extends React.Component {
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
+    this.setKeyboardOut(true);
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
@@ -297,6 +309,7 @@ class GiftedChat extends React.Component {
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(0);
     this.setBottomOffset(0);
+    this.setKeyboardOut(false);
     const newMessagesContainerHeight = this.getBasicMessagesContainerHeight();
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
