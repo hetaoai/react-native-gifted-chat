@@ -43,6 +43,7 @@ export default class Composer extends React.Component {
         onChangeText={(text) => this.onChangeText(text)}
         style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
         autoFocus={this.props.textInputAutoFocus}
+        returnKeyLabel={this.props.returnKeyLabel}
         value={this.props.text}
         enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
@@ -81,6 +82,7 @@ Composer.defaultProps = {
   textInputStyle: {},
   textInputAutoFocus: false,
   keyboardAppearance: 'default',
+  returnKeyLabel: '发送',
   onTextChanged: () => { },
   onInputSizeChanged: () => { },
 };
@@ -97,4 +99,5 @@ Composer.propTypes = {
   textInputStyle: TextInput.propTypes.style,
   textInputAutoFocus: PropTypes.bool,
   keyboardAppearance: PropTypes.string,
+  returnKeyLabel: PropTypes.string,
 };
