@@ -45,7 +45,6 @@ export default class Composer extends React.Component {
           const { text } = this.props;
           if (text.trim().length > 0) {
             this.props.onSend(text.trim(), true);
-            Keyboard.dismiss();
           }
         }}
         style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
